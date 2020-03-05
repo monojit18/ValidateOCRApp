@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -51,7 +50,7 @@ namespace ValidateOCRApp
 
         [FunctionName("ProcessBlobContents")]
         public static async Task ProcessBlobContents([OrchestrationTrigger]
-                                                     IDurableOrchestrationContext context)
+                                                     DurableOrchestrationContext context)
         {
 
             var blobInfoModel = context.GetInput<BlobInfoModel>();
@@ -147,8 +146,8 @@ namespace ValidateOCRApp
                                                         CloudBlockBlob cloudBlockBlob,
                                                         [Blob("ocrinfoblob/{name}",
                                                         FileAccess.ReadWrite)]
-                                                        byte[] blobContents,                                                        
-                                                        [DurableClient] IDurableOrchestrationClient
+                                                        byte[] blobContents,
+                                                        [OrchestrationClient]DurableOrchestrationClient                                                    
                                                         starter, ILogger logger)
         {
 
