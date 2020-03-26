@@ -16,7 +16,7 @@
       },
       "storageAccountName": {
         "type": "string",
-        "defaultValue": "srvlswkshpstorage"        
+        "defaultValue": "srvlswkshpstg"        
       },
       "storageAccountType": {
         "type": "string",
