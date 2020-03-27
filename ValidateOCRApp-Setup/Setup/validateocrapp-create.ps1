@@ -17,8 +17,10 @@ $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $
 # # PS Select Subscriotion 
 # Select-AzSubscription -SubscriptionId $subscriptionId
 
+#  KeyVault deploy
 $keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
 Invoke-Expression -Command $keyvaultDeployPath
 
+#  Function deploy
 $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
