@@ -1,0 +1,11 @@
+﻿{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "<>",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "OCR_API_KEY": "<>",
+        "OCR_URL": "<>",
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "<>",
+        "APPROVED_BLOB_NAME": "<>"
+    }
+}
