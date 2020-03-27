@@ -13,5 +13,7 @@
     <None Include="Setup\validateocrapp-create.ps1" />
     <None Include="Templates\validateocrapp-deploy.json" />
     <None Include="Templates\validateocrapp-deploy.ps1" />
+    <None Include="Templates\keyvault-deploy.json" />
+    <None Include="Templates\keyvault-deploy.ps1" />
   </ItemGroup>
 </Project>

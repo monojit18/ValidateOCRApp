@@ -1,8 +1,11 @@
-param([Parameter(Mandatory=$false)] [string] $resourceGroup = "appservice-workshop-rg",
-      [Parameter(Mandatory=$false)] [string] $subscriptionId = "6bdcc705-8db6-4029-953a-e749070e6db6",
-      [Parameter(Mandatory=$false)] [string] $baseFolderPath = "/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/ValidateOCRApp-Setup/")
+param([Parameter(Mandatory=$false)] [string] $resourceGroup = "<resource_group>",
+      [Parameter(Mandatory=$false)] [string] $subscriptionId = "<subscription_id>",
+      [Parameter(Mandatory=$false)] [string] $baseFolderPath = "<folder_path>",
+      [Parameter(Mandatory=$false)] [string] $keyVaultname = "<keyvault_name>",
+      [Parameter(Mandatory=$false)] [string] $objectId = "<object_Id>",)
 
 $templatesFolderPath = $baseFolderPath + "/Templates"
+$keyvaultDeployCommand = "/keyvault-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -keyVaultName $keyVaultName -objectId $objectId"
 $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath"
 
 # # PS Logout
@@ -13,6 +16,9 @@ $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $
 
 # # PS Select Subscriotion 
 # Select-AzSubscription -SubscriptionId $subscriptionId
+
+$keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
+Invoke-Expression -Command $keyvaultDeployPath
 
 $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
