@@ -4,9 +4,9 @@ param([Parameter(Mandatory=$true)] [string] $rg = "<resource_group>",
         [Parameter(Mandatory=$true)] [string] $objectId = "<object_id>")
 
 Test-AzResourceGroupDeployment -ResourceGroupName $rg `
--TemplateFile "$fpath/KeyVault/keyvault-deploy.json" `
+-TemplateFile "$fpath/keyvault-deploy.json" `
 -keyVaultName $keyVaultName -objectId $objectId
 
 New-AzResourceGroupDeployment -ResourceGroupName $rg `
--TemplateFile "$fpath/KeyVault/keyvault-deploy.json" `
+-TemplateFile "$fpath/keyvault-deploy.json" `
 -keyVaultName $keyVaultName -objectId $objectId
