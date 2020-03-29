@@ -3,8 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "appName": {
-        "type": "string",
-        "defaultValue": "ValidateOCRApp"
+        "type": "string"        
       },
       "skuName": {
         "type": "string",
@@ -15,8 +14,7 @@
         "defaultValue": "ElasticPremium"
       },
       "storageAccountName": {
-        "type": "string",
-        "defaultValue": "srvlswkstorage"        
+        "type": "string"        
       },
       "storageAccountType": {
         "type": "string",
