@@ -17,7 +17,7 @@ $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $
 # # PS Login
 # Connect-AzAccount
 
-PS Select Subscriotion 
+# PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
 
 # # CLI Select Subscriotion 
