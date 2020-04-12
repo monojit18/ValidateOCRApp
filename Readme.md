@@ -331,11 +331,11 @@ Invoke-Expression -Command $functionDeployPath
 
   ### 		Manual Intervention
 
-  ​			<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/Manual-Intervention.png" style="zoom:50%;" />					
+  ​			<img src="./Assets/Manual-Intervention.png" style="zoom:50%;" />					
 
-  ​			<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/Manual-Intervention-2.png" style="zoom:50%;" />			
+  ​			<img src="./Assets/Manual-Intervention-2.png" style="zoom:50%;" />			
 
-  ​			<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/Manual-Intervention-3.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:50%;" />
 
   ​			This is an imperotant task...as I always mention that 100% automation is NOT always possible.
 
