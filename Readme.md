@@ -265,19 +265,19 @@ Invoke-Expression -Command $functionDeployPath
 
   #### 	 	Copy Files: Setup
 
-  ​			<img src="./Assets/CopyFiles-Setup-1.png" style="zoom:50%;" />
+  ​			<img src="./Assets/CopyFiles-Setup-1.png" style="zoom:33%;" />
 
-  ​			<img src="./Assets/CopyFiles-2.png" style="zoom:50%;" />
+  ​			<img src="./Assets/CopyFiles-2.png" style="zoom:33%;" />
 
-  ​	   	 <img src="./Assets/COpyFile-3.png" style="zoom:50%;" />
+  ​	   	 <img src="./Assets/COpyFile-3.png" style="zoom:33%;" />
 
   
 
   #### 		Publish Artifact: Setup
 
-  ​			<img src="./Assets/Publish-Setup-1.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Publish-Setup-1.png" style="zoom:33%;" />
 
-  ​			<img src="./Assets/Publish-Setup-2.png" style="zoom:50%;" />	
+  ​			<img src="./Assets/Publish-Setup-2.png" style="zoom:33%;" />	
 
   ​			As you can see, the Publish location of the Build artifact is **Setup** folder in this case...so all PowerShell 			script and JSON templates will be copied and published in the said folder. *CD* pipeline would pickup the 			artifact from the **Setup** folder and act accordingly
 
@@ -285,19 +285,19 @@ Invoke-Expression -Command $functionDeployPath
 
   #### 		Copy Files: Templates
 
-  ​			<img src="./Assets/CopyFiles-Templates-1.png" style="zoom:50%;" />
+  ​			<img src="./Assets/CopyFiles-Templates-1.png" style="zoom:33%;" />
 
-  ​			<img src="./Assets/Copyfiles-Templates-3.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Copyfiles-Templates-3.png" style="zoom:33%;" />
 
-  ​			<img src="/Users/monojitdattams/Development/Related_Documents/Official/Blogs/Resources/2020/ValidateOCRApp/Copyfiles-Templates-2.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Copyfiles-Templates-2.png" style="zoom:33%;" />
 
   
 
   #### 		Publish Artifact: Templates
 
-  ​			<img src="./Assets/Publish-Templates-1.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Publish-Templates-1.png" style="zoom:33%;" />
 
-  ​			<img src="./Assets/Publish-Templates-2.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Publish-Templates-2.png" style="zoom:33%;" />
 
   ​			As you can see, the Publish location of the Build artifact is **Templates** folder in this case...so all PowerShell 			script and JSON templates will be copied and published in the said folder. *CD* pipeline would pickup the 			artifact from the **Templates** folder and act accordingly
 
@@ -305,7 +305,7 @@ Invoke-Expression -Command $functionDeployPath
 
   #### 		Trigger
 
-  ​			<img src="./Assets/trigger-ci.png" style="zoom:50%;" />
+  ​			<img src="./Assets/trigger-ci.png" style="zoom:33%;" />
 
   ​			Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder name; any chnages in this 			folder only will trigger this *Setup* pipeline. So, both application developers and DevOps admin
 
@@ -315,7 +315,7 @@ Invoke-Expression -Command $functionDeployPath
 
   ### 	ValidateOCRApp
 
-  ​			<img src="./Assets/BuildJob.png" style="zoom:50%;" />	
+  ​			<img src="./Assets/BuildJob.png" style="zoom:33%;" />	
 
   ​			As mentioend earlier, only Developers should have access to it which would build the Application code (*i.e. 			Durable function etc., in this case*)
 
@@ -325,17 +325,17 @@ Invoke-Expression -Command $functionDeployPath
 
   ### 		ValidateOCRApp-Setup
 
-  ​			<img src="./Assets/Setup-Script.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Setup-Script.png" style="zoom:33%;" />
 
-  ​			<img src="./Assets/Setup-Script-2.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Setup-Script-2.png" style="zoom:33%;" />
 
   ​			
 
   ### 		Manual Intervention
 
-  ​			<img src="./Assets/Manual-Intervention.png" style="zoom:50%;" />					
+  ​			<img src="./Assets/Manual-Intervention.png" style="zoom:33%;" />					
 
-  ​			<img src="./Assets/Manual-Intervention-2.png" style="zoom:50%;" />			
+  ​			<img src="./Assets/Manual-Intervention-2.png" style="zoom:33%;" />			
 
   ​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:33%;" />
 
