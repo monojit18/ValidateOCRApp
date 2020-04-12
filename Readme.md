@@ -118,7 +118,7 @@ var completedTask = await Task.WhenAny(approvalTask, timerTask);
   
 ```
 
-When Any one of these happens - either a timeout or the approvak event is fired, the wait here is over. Rest of the function app is nothing but sending this to an Azure Queue for fuether processing - 
+When Any one of these happens - either a timeout or the approval event is fired, the wait here is over. Rest of the function app is nothing but sending this to an Azure Queue for further processing -
 
 #### PostApproval
 
@@ -168,7 +168,7 @@ public static async Task ProcessQueueAsync([QueueTrigger("ocrinfoqueue")]
 
 ### tmp.local.settings.json
 
-This is to ensure that whoever checks out this code should know what vcalue they need to add in APplication settings in the portal. The original file *local.settings.json* **<u>should NOT be checked-in</u>** and kept in the local folder
+This is to ensure that whoever checks out this code should know what value they need to add in Application settings in the portal. The original file *local.settings.json* **<u>should NOT be checked-in</u>** and kept in the local folder
 
 ```JSON
 {
@@ -184,13 +184,13 @@ This is to ensure that whoever checks out this code should know what vcalue they
 }
 ```
 
-Shortly we would see how soe of these calues which aere secured e.g. *OCR_API_KEY* will kpet in KeyVault and referred by Azure DevOps during *Deployment* process - that way ADO becomes single source-of-truth for KeyVault taking away all complexities of KeyVault APIs and management
+Shortly we would see how some of these values which are secured e.g. *OCR_API_KEY* will kept in KeyVault and referred by Azure DevOps during *Deployment* process - that way ADO becomes single source-of-truth for KeyVault taking away all complexities of KeyVault APIs and management
 
 ## Deployment
 
-This folder contains files for setting up the entire infrsastructure for this use case using *PowerShell* and *ARM templates*. Later on we would conect this with Azure DevOps (ADO) and bring in maximum automation.
+This folder contains files for setting up the entire infrastructure for this use case using *PowerShell* and *ARM templates*. Later on we would connect this with Azure DevOps (ADO) and bring in maximum automation.
 
-As before lst us see the folder structure and then subsequnet details:
+As before lst us see the folder structure and then subsequent details:
 
 ## ValidateOCRApp-Setup
 
@@ -198,7 +198,7 @@ As before lst us see the folder structure and then subsequnet details:
 
 #### keyvault-deploy.json
 
-ARM template for creating/updating KeyVault which would be used for storig Secured Keys used by the 				Function app as explained above - primarily the keys which are mentioned in the *local.settings.json* file
+ARM template for creating/updating KeyVault which would be used for storing Secured Keys used by the 				Function app as explained above - primarily the keys which are mentioned in the *local.settings.json* file
 
 #### keyvault-deploy.ps1
 
@@ -258,7 +258,7 @@ Invoke-Expression -Command $functionDeployPath
 Primariy two sets of users - 
 
 * **DevOps Admin** - Can access only the ***ValidateOCRApp-Setup*** folder; so can setup the environment
-* **Developer** - Can access only the ***ValidateOCRApp*** folder i.e. Application folder; can only deploy appliction code. ***No access to or knowledge of*** the setup process of entire infrastructure
+* **Developer** - Can access only the ***ValidateOCRApp*** folder i.e. Application folder; can only deploy application code. ***No access to or knowledge of*** the setup process of entire infrastructure
 
 ### CI Pipelines
 
@@ -308,7 +308,7 @@ As you can see, the Publish location of the Build artifact is **Templates** fold
 
 <img src="./Assets/trigger-ci.png" style="zoom:33%;" />
 
-Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder name; any chnages in this folder only will trigger this *Setup* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
+Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder name; any changes in this folder only will trigger this *Setup* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
 
 
 
@@ -316,7 +316,7 @@ Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder
 
 ​	<img src="./Assets/BuildJob.png" style="zoom:33%;" />	
 
-​			As mentioend earlier, only Developers should have access to it which would build the Application code (*i.e. 			Durable function etc., in this case*)
+​	As mentioned earlier, only Developers should have access to it which would build the Application code (*i.e. Durable function etc., in this case*)
 
 ##### Trigger
 
@@ -344,9 +344,9 @@ Please look at the *Path filters* section - *ValidateOCRApp* is the folder name;
 
 ​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:33%;" />
 
-This is an imperotant task...as I always mention that 100% automation is NOT always possible.
+This is an important task...as I always mention that 100% automation is NOT always possible.
 
-There are and there will be senarios which need some Manual intervention or other for meeting some lager goal; e.g. like in this case, the job of the DevOps admin who is running this Setup CD pipeline, is to check and add the OCR API key into the KeyVault - so he has to go the portal and get the API ket from respwctive resource(s) and then add into the KeyVault.
+There are and there will be scenarios which need some Manual intervention or other for meeting some lager goal; e.g. like in this case, the job of the DevOps admin who is running this Setup CD pipeline, is to check and add the OCR API key into the KeyVault - so he has to go the portal and get the API ket from respective resource(s) and then add into the KeyVault.
 
 Application deployment steps in ADO can actually read from KeyVault and proceed seamlessly.
 
