@@ -5,6 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidateOCRApp", "ValidateO
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "ValidateOCRApp-Setup", "ValidateOCRApp-Setup\ValidateOCRApp-Setup.mdproj", "{8DEB8BCF-325A-4549-8276-296C797BA97D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6DA0A44E-C399-406B-9509-420325F8E022}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
