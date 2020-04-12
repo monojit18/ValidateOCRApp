@@ -1,5 +1,9 @@
 # ValidateOCRApp
 
+
+
+<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/ValidateOCR.png" style="zoom:50%;" />
+
 The purpose of this document is to provide an idea on how to implement an automated Approval process workflow using Azure Durable Function and then how to finally automate the setup and deployment of the entire application and its ancilliary services.
 
 The project folder structure is divided into 2 sections -
@@ -182,13 +186,13 @@ This is to ensure that whoever checks out this code should know what vcalue they
 
 Shortly we would see how soe of these calues which aere secured e.g. *OCR_API_KEY* will kpet in KeyVault and referred by Azure DevOps during *Deployment* process - that way ADO becomes single source-of-truth for KeyVault taking away all complexities of KeyVault APIs and management
 
-# Deployment
+## Deployment
 
 This folder contains files for setting up the entire infrsastructure for this use case using *PowerShell* and *ARM templates*. Later on we would conect this with Azure DevOps (ADO) and bring in maximum automation.
 
 As before lst us see the folder structure and then subsequnet details:
 
-## 	ValidateOCRApp-Setup
+## ValidateOCRApp-Setup
 
 ### 		Templates		
 
@@ -247,9 +251,9 @@ $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
 ```
 
-# Integration with DevOps
+## Integration with DevOps
 
-## 	Users
+### 	Users
 
 ​		Primariy two sets of users - 
 
@@ -259,11 +263,11 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  ## CI Pipelines
+  ### CI Pipelines
 
-  ### 	ValidateOCRApp-Setup
+  #### 	ValidateOCRApp-Setup
 
-  #### 	 	Copy Files: Setup
+  ##### 	 	Copy Files: Setup
 
   ​			<img src="./Assets/CopyFiles-Setup-1.png" style="zoom:33%;" />
 
@@ -273,7 +277,7 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  #### 		Publish Artifact: Setup
+  ##### 		Publish Artifact: Setup
 
   ​			<img src="./Assets/Publish-Setup-1.png" style="zoom:33%;" />
 
@@ -283,7 +287,7 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  #### 		Copy Files: Templates
+  ##### 		Copy Files: Templates
 
   ​			<img src="./Assets/CopyFiles-Templates-1.png" style="zoom:33%;" />
 
@@ -293,7 +297,7 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  #### 		Publish Artifact: Templates
+  ##### 		Publish Artifact: Templates
 
   ​			<img src="./Assets/Publish-Templates-1.png" style="zoom:33%;" />
 
@@ -303,7 +307,7 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  #### 		Trigger
+  ##### 		Trigger
 
   ​			<img src="./Assets/trigger-ci.png" style="zoom:33%;" />
 
@@ -313,17 +317,27 @@ Invoke-Expression -Command $functionDeployPath
 
   
 
-  ### 	ValidateOCRApp
+  #### 	ValidateOCRApp
 
   ​			<img src="./Assets/BuildJob.png" style="zoom:33%;" />	
 
   ​			As mentioend earlier, only Developers should have access to it which would build the Application code (*i.e. 			Durable function etc., in this case*)
 
+  ##### 		Trigger
+
+  ​			<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/trigger-ci2.png" style="zoom:33%;" />	
+
+  ​			Please look at the *Path filters* section - *ValidateOCRApp* is the folder name; any chnages in this folder only 			will trigger this *Application Deployment* pipeline. So, both application developers and DevOps admin
+
+  ​			can peacefully work on their respective flows with minimal impact on each other!
+
+  ​		
+
   
 
-  ## CD Pipelines
+  ### CD Pipelines
 
-  ### 		ValidateOCRApp-Setup
+  #### 		ValidateOCRApp-Setup
 
   ​			<img src="./Assets/Setup-Script.png" style="zoom:33%;" />
 
@@ -348,3 +362,13 @@ Invoke-Expression -Command $functionDeployPath
   ​			As you can see, *Notify users* section actually can notify multiple folks to perform this Manual Intervention 			task. ADO will Pause execution of the pipeline at this stage and will wait for a Manual Resume/Reject 			decision by the designated person (*one of DevOps Admin group or can be someone else from the Team as 			decided by DevOps admin*)
 
   ​		
+
+  #### 		ValidateOCRApp
+
+  ​			<img src="./Assets/Deploy-Setup.png" style="zoom:33%;" />
+
+  ​			This is the Application Deployment step and only one task - *Deploy Azure Function App*
+
+  
+
+  =================================X======================================
