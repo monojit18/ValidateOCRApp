@@ -337,7 +337,7 @@ Invoke-Expression -Command $functionDeployPath
 
   ​			<img src="./Assets/Manual-Intervention-2.png" style="zoom:50%;" />			
 
-  ​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:50%;" />
+  ​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:33%;" />
 
   ​			This is an imperotant task...as I always mention that 100% automation is NOT always possible.
 
