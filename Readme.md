@@ -334,7 +334,7 @@ As you can see, *Notify users* section actually can notify multiple folks to per
 
 #### ValidateOCRApp
 
-​			<img src="./Assets/Deploy-Setup.png" style="zoom:100%;" />
+#### 			![](./Assets/DeployJob.png)
 
 This is the Application Deployment step and only one task - *Deploy Azure Function App*
 
