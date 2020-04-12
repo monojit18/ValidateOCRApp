@@ -8,16 +8,14 @@ The purpose of this document is to provide an idea on how to implement an automa
 
 The project folder structure is divided into 2 sections -
 
-- Application Code - Cotaining the source code of the entire flow
+- Application Code - Containing the source code of the entire flow
 - Deployment or Setup - This is IaaC or Infrastructure as Code to setup the entire process - end to end
 
 Let us delve into each one of these one by one
 
-## Application Code
+## ValidateOCRApp
 
-### ValidateOCRApp - Main Function 
-
-#### Blob Trigger
+### Blob Trigger
 
 Blob trigger function with an initialised Orchestrator client argument. This client will be responsible for initiation 			of an Orchestrator function which subsequently would flow through.
 
@@ -46,7 +44,7 @@ public static async Task ValidateOCRAppStart([BlobTrigger("ocrinfoblob/{name}")]
 }
 ```
 
-#### Orchestrator Function
+### Orchestrator Function
 
 Receives Blob images through *OrchestrationTrigger* from *OrchestrationClient*. This function would then pass on the Blob image to a Cognitive API call on Azure - OCR; to retrieve the Text content within the image. 
 
@@ -120,7 +118,7 @@ var completedTask = await Task.WhenAny(approvalTask, timerTask);
 
 When Any one of these happens - either a timeout or the approval event is fired, the wait here is over. Rest of the function app is nothing but sending this to an Azure Queue for further processing -
 
-#### PostApproval
+### PostApproval
 
 ```C#
 [FunctionName("PostApproval")]
@@ -168,8 +166,6 @@ public static async Task ProcessQueueAsync([QueueTrigger("ocrinfoqueue")]
 
 ### tmp.local.settings.json
 
-This is to ensure that whoever checks out this code should know what value they need to add in Application settings in the portal. The original file *local.settings.json* **<u>should NOT be checked-in</u>** and kept in the local folder
-
 ```JSON
 {
     "IsEncrypted": false,
@@ -184,15 +180,15 @@ This is to ensure that whoever checks out this code should know what value they 
 }
 ```
 
+This is to ensure that whoever checks out this code should know what value they need to add in Application settings in the portal. The original file *local.settings.json* **<u>should NOT be checked-in</u>** and kept in the local folder
+
 Shortly we would see how some of these values which are secured e.g. *OCR_API_KEY* will kept in KeyVault and referred by Azure DevOps during *Deployment* process - that way ADO becomes single source-of-truth for KeyVault taking away all complexities of KeyVault APIs and management
 
-## Deployment
+## ValidateOCRApp-Setup
 
 This folder contains files for setting up the entire infrastructure for this use case using *PowerShell* and *ARM templates*. Later on we would connect this with Azure DevOps (ADO) and bring in maximum automation.
 
 As before lst us see the folder structure and then subsequent details:
-
-## ValidateOCRApp-Setup
 
 ### Templates		
 
@@ -266,47 +262,35 @@ Primariy two sets of users -
 
 ##### Copy Files: Setup
 
-​	<img src="./Assets/CopyFiles-Setup-1.png" style="zoom:33%;" />
+​	<img src="./Assets/CopyFiles-Setup-1.png" style="zoom:100%;" />
 
-​	<img src="./Assets/CopyFiles-2.png" style="zoom:33%;" />
-
-​	 <img src="./Assets/COpyFile-3.png" style="zoom:33%;" />
+<img src="./Assets/CopyFiles-2.png" style="zoom:100%;" />	 <img src="./Assets/COpyFile-3.png" style="zoom:100%;" />
 
 
 
 ##### Publish Artifact: Setup
 
-##### <img src="./Assets/Publish-Setup-1.png" style="zoom:33%;" />
+##### <img src="./Assets/Publish-Setup-1.png" style="zoom:100%;" />
 
-<img src="./Assets/Publish-Setup-2.png" style="zoom:33%;" />	
+<img src="./Assets/Publish-Setup-2.png" style="zoom:100%;" />	
 
 As you can see, the Publish location of the Build artifact is **Setup** folder in this case...so all PowerShell script and JSON templates will be copied and published in the said folder. *CD* pipeline would pickup the artifact from the **Setup** folder and act accordingly
 
-
-
 ##### Copy Files: Templates
 
-​	<img src="./Assets/CopyFiles-Templates-1.png" style="zoom:33%;" />
-
-​	<img src="./Assets/Copyfiles-Templates-3.png" style="zoom:33%;" />
-
-​	<img src="./Assets/Copyfiles-Templates-2.png" style="zoom:33%;" />
+​	<img src="./Assets/CopyFiles-Templates-1.png" style="zoom:100%;" />	<img src="./Assets/Copyfiles-Templates-3.png" style="zoom:100%;" />	<img src="./Assets/Copyfiles-Templates-2.png" style="zoom:100%;" />
 
 
 
 ##### Publish Artifact: Templates
 
-​	<img src="./Assets/Publish-Templates-1.png" style="zoom:33%;" />
-
-​	<img src="./Assets/Publish-Templates-2.png" style="zoom:33%;" />
+​	<img src="./Assets/Publish-Templates-1.png" style="zoom:100%;" />	<img src="./Assets/Publish-Templates-2.png" style="zoom:100%;" />
 
 As you can see, the Publish location of the Build artifact is **Templates** folder in this case...so all PowerShell script and JSON templates will be copied and published in the said folder. *CD* pipeline would pickup the artifact from the **Templates** folder and act accordingly
 
-
-
 ##### Trigger
 
-<img src="./Assets/trigger-ci.png" style="zoom:33%;" />
+<img src="./Assets/trigger-ci.png" style="zoom:100%;" />
 
 Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder name; any changes in this folder only will trigger this *Setup* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
 
@@ -314,15 +298,15 @@ Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder
 
 #### ValidateOCRApp
 
-​	<img src="./Assets/BuildJob.png" style="zoom:33%;" />	
+#### 	<img src="./Assets/BuildJob.png" style="zoom:100%;" />	
 
 ​	As mentioned earlier, only Developers should have access to it which would build the Application code (*i.e. Durable function etc., in this case*)
 
 ##### Trigger
 
-​			<img src="./Assets/trigger-ci2.png" style="zoom:33%;" />	
+​			<img src="./Assets/trigger-ci2.png" style="zoom:100%;" />	
 
-Please look at the *Path filters* section - *ValidateOCRApp* is the folder name; any chnages in this folder only will trigger this *Application Deployment* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
+Please look at the *Path filters* section - *ValidateOCRApp* is the folder name; any changes in this folder only will trigger this *Application Deployment* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
 
 ​		
 
@@ -330,19 +314,13 @@ Please look at the *Path filters* section - *ValidateOCRApp* is the folder name;
 
 #### ValidateOCRApp-Setup
 
-​			<img src="./Assets/Setup-Script.png" style="zoom:33%;" />
-
-​			<img src="./Assets/Setup-Script-2.png" style="zoom:33%;" />
+​			<img src="./Assets/Setup-Script.png" style="zoom:100%;" />			<img src="./Assets/Setup-Script-2.png" style="zoom:100%;" />
 
 ​			
 
 ### Manual Intervention
 
-​			<img src="./Assets/Manual-Intervention.png" style="zoom:33%;" />					
-
-​			<img src="./Assets/Manual-Intervention-2.png" style="zoom:33%;" />			
-
-​			<img src="./Assets/Manual-Intervention-3.png" style="zoom:33%;" />
+​			<img src="./Assets/Manual-Intervention.png" style="zoom:100%;" />								<img src="./Assets/Manual-Intervention-2.png" style="zoom:100%;" />						<img src="./Assets/Manual-Intervention-3.png" style="zoom:100%;" />
 
 This is an important task...as I always mention that 100% automation is NOT always possible.
 
@@ -356,7 +334,7 @@ As you can see, *Notify users* section actually can notify multiple folks to per
 
 #### ValidateOCRApp
 
-​			<img src="./Assets/Deploy-Setup.png" style="zoom:33%;" />
+​			<img src="./Assets/Deploy-Setup.png" style="zoom:100%;" />
 
 This is the Application Deployment step and only one task - *Deploy Azure Function App*
 
