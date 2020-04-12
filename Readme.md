@@ -298,7 +298,7 @@ As you can see, the Publish location of the Build artifact is **Setup** folder i
 
 ​	<img src="./Assets/Publish-Templates-1.png" style="zoom:33%;" />
 
-​	<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/Publish-Templates-2.png" style="zoom:33%;" />
+​	<img src="./Assets/Publish-Templates-2.png" style="zoom:33%;" />
 
 As you can see, the Publish location of the Build artifact is **Templates** folder in this case...so all PowerShell script and JSON templates will be copied and published in the said folder. *CD* pipeline would pickup the artifact from the **Templates** folder and act accordingly
 
@@ -306,7 +306,7 @@ As you can see, the Publish location of the Build artifact is **Templates** fold
 
 ##### Trigger
 
-<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/trigger-ci.png" style="zoom:33%;" />
+<img src="./Assets/trigger-ci.png" style="zoom:33%;" />
 
 Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder name; any chnages in this folder only will trigger this *Setup* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
 
@@ -320,7 +320,7 @@ Please look at the *Path filters* section - *ValidateOCRApp-Setup* is the folder
 
 ##### Trigger
 
-​			<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/trigger-ci2.png" style="zoom:33%;" />	
+​			<img src="./Assets/trigger-ci2.png" style="zoom:33%;" />	
 
 Please look at the *Path filters* section - *ValidateOCRApp* is the folder name; any chnages in this folder only will trigger this *Application Deployment* pipeline. So, both application developers and DevOps admin can peacefully work on their respective flows with minimal impact on each other!
 
