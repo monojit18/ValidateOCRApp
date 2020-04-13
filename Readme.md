@@ -2,7 +2,7 @@
 
 
 
-<img src="/Users/monojitdattams/Development/Projects/Serverless_Projects/C#_Sources/ValidateOCRApp/Assets/ValidateOCR.png" style="zoom:50%;" />
+<img src="./Assets/ValidateOCR.png" style="zoom:50%;" />
 
 The purpose of this document is to provide an idea on how to implement an automated Approval process workflow using Azure Durable Function and then how to finally automate the setup and deployment of the entire application and its ancilliary services.
 
