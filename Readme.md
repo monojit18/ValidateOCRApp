@@ -188,7 +188,7 @@ Shortly we would see how some of these values which are secured e.g. *OCR_API_KE
 
 This folder contains files for setting up the entire infrastructure for this use case using *PowerShell* and *ARM templates*. Later on we would connect this with Azure DevOps (ADO) and bring in maximum automation.
 
-As before lst us see the folder structure and then subsequent details:
+As before let us see the folder structure and then subsequent details:
 
 ### Templates		
 
@@ -202,7 +202,9 @@ PowerShell script to execute the above ARM template
 
 #### validateocrapp-deploy.json
 
-ARM template for creating/updating Function App and related resources
+ARM template for creating/updating Function App and related resources.
+
+Function should be in ***Consumption Plan (Y)*** as the use case would have sporadic image uploads rather than continuous usage (*in which case we should have gone for **Premium Plan - EP***)
 
 #### validateocrapp-deploy.ps1
 
