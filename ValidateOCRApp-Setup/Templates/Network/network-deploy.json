@@ -2,16 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "aksVNetName": {
+      "vnetName": {
         "type": "string"
       },
-      "aksVNetPrefix": {
+      "vnetPrefix": {
         "type": "string"
       },      
-      "aksSubnetName": {
+      "subnetName": {
         "type": "string"
       },
-      "aksSubnetPrefix": {
+      "subnetPrefix": {
         "type": "string"     
       },      
       "location": {
@@ -24,12 +24,12 @@
       {
         "apiVersion": "2018-10-01",
         "type": "Microsoft.Network/virtualNetworks",
-        "name": "[parameters('aksVNetName')]",
+        "name": "[parameters('vnetName')]",
         "location": "[parameters('location')]",
         "properties": {
           "addressSpace": {
             "addressPrefixes": [
-              "[parameters('aksVNetPrefix')]"
+              "[parameters('vnetPrefix')]"
             ]
           }
         },
@@ -38,12 +38,12 @@
             "apiVersion": "2018-10-01",
             "type": "subnets",
             "location": "[parameters('location')]",
-            "name": "[parameters('aksSubnetName')]",
+            "name": "[parameters('subnetName')]",
             "dependsOn": [
-              "[parameters('aksVNetName')]"
+              "[parameters('vnetName')]"
             ],
             "properties": {
-              "addressPrefix": "[parameters('aksSubnetPrefix')]",
+              "addressPrefix": "[parameters('subnetPrefix')]",
               "delegations": [
                 {
                     "name": "delegation",
