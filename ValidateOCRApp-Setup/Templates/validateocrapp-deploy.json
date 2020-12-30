@@ -122,6 +122,7 @@
                     "[resourceId('Microsoft.Web/sites', variables('functionAppName'))]"
                 ],
                 "properties": {
+                    "vnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
                     "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
                     "isSwift": true
                 }
