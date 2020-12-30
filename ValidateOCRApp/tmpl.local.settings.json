@@ -3,9 +3,9 @@
     "Values": {
         "AzureWebJobsStorage": "<storage_account_key>",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-        "OCR_API_KEY": "<>",
-        "OCR_URL": "<>",
-        "APPINSIGHTS_INSTRUMENTATIONKEY": "<>",
-        "APPROVED_BLOB_NAME": "<>"
+        "OCR_API_KEY": "<ocr_api_key>",
+        "OCR_URL": "<ocr_api_url>",
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "<appinsights_instrumentation_key>",
+        "APPROVED_BLOB_NAME": "<approved_blob_name>"
     }
 }
