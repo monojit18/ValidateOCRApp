@@ -25,32 +25,35 @@ $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $
 # PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
 
+$vnetDisconnectCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup"
+Invoke-Expression -Command $vnetDisconnectCommand
+
 $slotNamesList = @("Dev", "QA")
 foreach ($slotName in $slotNamesList)
 {
       $appSlotName = $appName + "/" + $slotName
-      $vnetIntCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $appSlotName"
-      Invoke-Expression -Command $vnetIntCommand
+      $vnetDisconnectCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $appSlotName"
+      Invoke-Expression -Command $vnetDisconnectCommand
 
 }
 
-#  Network deploy
-# $networkDeployPath = $templatesFolderPath + $networkDeployCommand
-# Invoke-Expression -Command $networkDeployPath
+ Network deploy
+$networkDeployPath = $templatesFolderPath + $networkDeployCommand
+Invoke-Expression -Command $networkDeployPath
 
-# #  KeyVault deploy
-# $keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
-# Invoke-Expression -Command $keyvaultDeployPath
+#  KeyVault deploy
+$keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
+Invoke-Expression -Command $keyvaultDeployPath
 
-# #  Function deploy
-# $functionDeployPath = $templatesFolderPath + $functionDeployCommand
-# Invoke-Expression -Command $functionDeployPath
+#  Function deploy
+$functionDeployPath = $templatesFolderPath + $functionDeployCommand
+Invoke-Expression -Command $functionDeployPath
 
-# foreach ($slotName in $slotNamesList)
-# {
-#       $appSlotName = $appName + "/" + $slotName
-#       $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
-#       Invoke-Expression -Command $vnetIntCommand
+foreach ($slotName in $slotNamesList)
+{
+      $appSlotName = $appName + "/" + $slotName
+      $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
+      Invoke-Expression -Command $vnetIntCommand
 
-# }
+}
 
