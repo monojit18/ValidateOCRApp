@@ -28,7 +28,7 @@ Select-AzSubscription -SubscriptionId $subscriptionId
 $slotNamesList = @("Dev", "QA")
 foreach ($slotName in $slotNamesList)
 {
-      $appSlotName = $appName + $slotName
+      $appSlotName = $appName + "/" + $slotName
       $vnetIntCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $appSlotName"
       Invoke-Expression -Command $vnetIntCommand
 
@@ -49,7 +49,7 @@ Invoke-Expression -Command $functionDeployPath
 
 foreach ($slotName in $slotNamesList)
 {
-      $appSlotName = $appName + $slotName
+      $appSlotName = $appName + "/" + $slotName
       $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
       Invoke-Expression -Command $vnetIntCommand
 
