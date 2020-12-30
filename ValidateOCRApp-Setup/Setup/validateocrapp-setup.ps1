@@ -25,6 +25,15 @@ $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $
 # PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
 
+$slotNamesList = @("Dev", "QA")
+foreach ($slotName in $slotNamesList)
+{
+      $appSlotName = $appName + $slotName
+      $vnetIntCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $appSlotName"
+      Invoke-Expression -Command $vnetIntCommand
+
+}
+
 #  Network deploy
 $networkDeployPath = $templatesFolderPath + $networkDeployCommand
 Invoke-Expression -Command $networkDeployPath
@@ -37,7 +46,7 @@ Invoke-Expression -Command $keyvaultDeployPath
 $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
 
-$slotNamesList = @("Dev", "QA")
+
 foreach ($slotName in $slotNamesList)
 {
       $appSlotName = $appName + $slotName
