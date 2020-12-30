@@ -35,23 +35,22 @@ foreach ($slotName in $slotNamesList)
 }
 
 #  Network deploy
-$networkDeployPath = $templatesFolderPath + $networkDeployCommand
-Invoke-Expression -Command $networkDeployPath
+# $networkDeployPath = $templatesFolderPath + $networkDeployCommand
+# Invoke-Expression -Command $networkDeployPath
 
-#  KeyVault deploy
-$keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
-Invoke-Expression -Command $keyvaultDeployPath
+# #  KeyVault deploy
+# $keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
+# Invoke-Expression -Command $keyvaultDeployPath
 
-#  Function deploy
-$functionDeployPath = $templatesFolderPath + $functionDeployCommand
-Invoke-Expression -Command $functionDeployPath
+# #  Function deploy
+# $functionDeployPath = $templatesFolderPath + $functionDeployCommand
+# Invoke-Expression -Command $functionDeployPath
 
+# foreach ($slotName in $slotNamesList)
+# {
+#       $appSlotName = $appName + "/" + $slotName
+#       $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
+#       Invoke-Expression -Command $vnetIntCommand
 
-foreach ($slotName in $slotNamesList)
-{
-      $appSlotName = $appName + "/" + $slotName
-      $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
-      Invoke-Expression -Command $vnetIntCommand
-
-}
+# }
 
