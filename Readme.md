@@ -25,8 +25,7 @@ public static async Task ValidateOCRAppStart([BlobTrigger("ocrinfoblob/{name}")]
                                              CloudBlockBlob cloudBlockBlob,
                                              [Blob("ocrinfoblob/{name}",
                                              FileAccess.ReadWrite)]
-                                             byte[] blobContents,                                              																							[OrchestrationClient]
-                                             DurableOrchestrationClient
+                                             byte[] blobContents,                                              																							[DurableClient] IDurableOrchestrationClient
                                              starter, ILogger logger)
 {
 
@@ -50,14 +49,13 @@ Receives Blob images through *OrchestrationTrigger* from *OrchestrationClient*. 
 
 ```c#
 [FunctionName("ProcessBlobContents")]
-public static async Task ProcessBlobContents([OrchestrationTrigger]
-																						DurableOrchestrationContext context)
+public static async Task ProcessBlobContents([OrchestrationTrigger] IDurableOrchestrationContext context)
 {
 
   var blobInfoModel = context.GetInput<BlobInfoModel>();
   var blobContents = blobInfoModel.BlobContents;
-
-  var parsedOCRString = await context.CallActivityAsync<string>("ParseOCR", blobContents);
+  var parsedOCRString = await context.CallActivityAsync<string>("ParseOCR",
+                                                                blobInfoModel);
 
   var ocrInfoModel = JsonConvert.DeserializeObject<OCRInfoModel>(parsedOCRString);
   var approvalModel = new ApprovalModel()
@@ -143,8 +141,8 @@ public static async Task PostApprovalAsync([ActivityTrigger] UploadImageModel up
 [FunctionName("ProcessQueue")]
 public static async Task ProcessQueueAsync([QueueTrigger("ocrinfoqueue")]
                                            CloudQueueMessage cloudQueueMessage, 
-                                           [OrchestrationClient] DurableOrchestrationClient
-																					client, ILogger log)
+                                           [DurableClient] IDurableOrchestrationClient
+																					 client, ILogger log)
 {
 
     var queueMessageString = cloudQueueMessage.AsString;
