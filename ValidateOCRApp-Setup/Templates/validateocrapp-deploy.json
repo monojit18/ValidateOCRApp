@@ -19,6 +19,9 @@
       "vnetName": {
         "type": "string"        
       },
+      "subnetName": {
+        "type": "string"        
+      },
       "storageAccountType": {
         "type": "string",
         "defaultValue": "Standard_LRS",
@@ -109,8 +112,22 @@
                 "value": "[reference(resourceId('microsoft.insights/components/', variables('applicationInsightsName')), '2015-05-01').InstrumentationKey]"
               }              
             ]
-          }
-        }        
+          },
+          "resources": [
+            {
+                "type": "networkConfig",
+                "apiVersion": "2019-08-01",
+                "name": "virtualNetwork",
+                "dependsOn": [
+                    "[resourceId('Microsoft.Web/sites', variables('functionAppName'))]"
+                ],
+                "properties": {
+                    "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
+                    "isSwift": true
+                }
+            }
+          ]
+        }
       },
       {
         "apiVersion": "2018-11-01",

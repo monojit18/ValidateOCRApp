@@ -19,7 +19,7 @@ $keyvaultDeployCommand = "/KeyVault/$kvTemplateFileName.ps1 -rg $resourceGroup -
 $networkNames = "-vnetName $vnetName -vnetPrefix $vnetPrefix -subnetName $subnetName -subNetPrefix $subNetPrefix"
 $networkDeployCommand = "/Network/$networkTemplateFileName.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $networkTemplateFileName $networkNames"
 
-$functionDeps = "-appName $appName -storageAccountName $storageAccountName -vnetName $vnetName"
+$functionDeps = "-appName $appName -storageAccountName $storageAccountName -vnetName $vnetName -subnetName $subnetName"
 $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $functionTemplateFileName $functionDeps"
 
 # PS Select Subscription 
