@@ -30,9 +30,8 @@ Invoke-Expression -Command $vnetDisconnectCommand
 
 $slotNamesList = @("Dev", "QA")
 foreach ($slotName in $slotNamesList)
-{
-      $appSlotName = $appName + "/" + $slotName
-      $vnetDisconnectCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $appSlotName"
+{      
+      $vnetDisconnectCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup -s $slotName"
       Invoke-Expression -Command $vnetDisconnectCommand
 
 }
@@ -50,9 +49,8 @@ $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
 
 foreach ($slotName in $slotNamesList)
-{
-      $appSlotName = $appName + "/" + $slotName
-      $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
+{      
+      $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $slotName"
       Invoke-Expression -Command $vnetIntCommand
 
 }
