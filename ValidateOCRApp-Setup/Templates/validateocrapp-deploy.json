@@ -7,11 +7,11 @@
       },
       "skuName": {
         "type": "string",
-        "defaultValue": "Y1"
+        "defaultValue": "EP2"
       },
       "skuTier": {
         "type": "string",
-        "defaultValue": "Dynamic"
+        "defaultValue": "ElasticPremium"
       },
       "storageAccountName": {
         "type": "string"        
