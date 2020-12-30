@@ -37,7 +37,7 @@ foreach ($slotName in $slotNamesList)
 
 }
 
- Network deploy
+# Network deploy
 $networkDeployPath = $templatesFolderPath + $networkDeployCommand
 Invoke-Expression -Command $networkDeployPath
 
