@@ -19,7 +19,7 @@ $keyvaultDeployCommand = "/KeyVault/$kvTemplateFileName.ps1 -rg $resourceGroup -
 $networkNames = "-vnetName $vnetName -vnetPrefix $vnetPrefix -subnetName $subnetName -subNetPrefix $subNetPrefix"
 $networkDeployCommand = "/Network/$networkTemplateFileName.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $networkTemplateFileName $networkNames"
 
-$functionDeps = "-appName $appName -storageAccountName $storageAccountName -vnetName $vnetName -subnetName $subnetName"
+$functionDeps = "-appName $appName -storageAccountName $storageAccountName"
 $functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $functionTemplateFileName $functionDeps"
 
 # PS Select Subscription 
@@ -36,3 +36,6 @@ Invoke-Expression -Command $keyvaultDeployPath
 #  Function deploy
 $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
+
+$vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName"
+Invoke-Expression -Command $vnetIntCommand

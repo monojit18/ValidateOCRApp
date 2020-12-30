@@ -15,13 +15,7 @@
       },
       "storageAccountName": {
         "type": "string"        
-      },
-      "vnetName": {
-        "type": "string"        
-      },
-      "subnetName": {
-        "type": "string"        
-      },
+      },     
       "storageAccountType": {
         "type": "string",
         "defaultValue": "Standard_LRS",
@@ -84,8 +78,7 @@
         "kind": "functionapp",
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
-          "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"          
         ],
         "properties": {
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
@@ -112,22 +105,7 @@
                 "value": "[reference(resourceId('microsoft.insights/components/', variables('applicationInsightsName')), '2015-05-01').InstrumentationKey]"
               }              
             ]
-          },
-          "resources": [
-            {
-                "type": "networkConfig",
-                "apiVersion": "2019-08-01",
-                "name": "virtualNetwork",
-                "dependsOn": [
-                    "[resourceId('Microsoft.Web/sites', variables('functionAppName'))]"
-                ],
-                "properties": {
-                    "vnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
-                    "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]",
-                    "isSwift": true
-                }
-            }
-          ]
+          }
         }
       },
       {
