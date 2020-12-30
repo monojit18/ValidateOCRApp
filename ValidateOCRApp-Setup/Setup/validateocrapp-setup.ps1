@@ -36,6 +36,14 @@ foreach ($slotName in $slotNamesList)
 
 }
 
+$LASTEXITCODE
+if (!$?)
+{
+
+      Write-Host "Error Disconnecting exsitng VNET integration for $appName"
+
+}
+
 # Network deploy
 $networkDeployPath = $templatesFolderPath + $networkDeployCommand
 Invoke-Expression -Command $networkDeployPath
@@ -52,6 +60,14 @@ foreach ($slotName in $slotNamesList)
 {      
       $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $slotName"
       Invoke-Expression -Command $vnetIntCommand
+
+}
+
+$LASTEXITCODE
+if (!$?)
+{
+
+      Write-Host "Error Adding VNET integration for $appName"
 
 }
 
