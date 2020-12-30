@@ -5,16 +5,177 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.11" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.DurableTask" Version="2.4.0" />
   </ItemGroup>  
+  
+  <ItemGroup>
+    <None Include="**/*" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ValidateOCRApp.csproj" />
+    <None Remove="bin\Debug\netcoreapp3.1\Azure.Identity.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Azure.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.ApplicationInsights.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Dynamitey.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AI.DependencyCollector.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\ImpromptuInterface.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authorization.Policy.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Connections.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Extensions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.WebApiCompatShim.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Routing.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Https.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.WebUtilities.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\DurableTask.AzureStorage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Extensions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\DurableTask.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Extensions.Http.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Extensions.Storage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Formatters.Json.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Host.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Extensions.DurableTask.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.EnvironmentVariables.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.DiagnosticAdapter.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Http.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.ObjectPool.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Net.Http.Headers.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Host.Storage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libMonoPosixHelper.so" />
+    <None Remove="bin\Debug\netcoreapp3.1\System.Reactive.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-x86\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\NCrontab.Signed.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\osx\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x64\native\MonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\osx\native\libMonoPosixHelper.dylib" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x86\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\System.Reactive.Interfaces.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-arm\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\sni.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-x64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Configuration.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x86\native\libMonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libMonoPosixHelper.so" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-arm64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-armel\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libMonoPosixHelper.so" />
+    <None Remove="bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libMonoPosixHelper.so" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x86\native\MonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard1.3\System.Data.SqlClient.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\sni.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard1.3\System.Data.SqlClient.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\host.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\win-x64\native\libMonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\local.settings.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libMonoPosixHelper.so" />
+    <None Remove="bin\Debug\netcoreapp3.1\ValidateOCRApp.deps.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ValidateOCRApp.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\ValidateOCRApp.pdb" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\function.deps.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\DurableTask.AzureStorage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Azure.Identity.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Azure.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Dynamitey.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\DurableTask.Core.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\ImpromptuInterface.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.AI.DependencyCollector.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.Azure.WebJobs.Extensions.DurableTask.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.Azure.WebJobs.Extensions.Storage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.AspNetCore.Server.Kestrel.Https.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.Identity.Client.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\NCrontab.Signed.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\Microsoft.WindowsAzure.Storage.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\linux-x64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\linux-x86\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\osx\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x64\native\libMonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\linux-arm\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\linux-arm64\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\unix\lib\netstandard1.3\System.Data.SqlClient.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\linux-armel\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x64\native\MonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x86\lib\netstandard2.0\Mono.Posix.NETStandard.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x86\native\libMonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win-x86\native\MonoPosixHelper.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win\lib\netstandard1.3\System.Data.SqlClient.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win7-x64\native\sni.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\runtimes\win7-x86\native\sni.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\ValidateOCRApp.dll" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\ValidateOCRApp.pdb" />
+    <None Remove="bin\Debug\netcoreapp3.1\ProcessBlobContents\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ProcessQueue\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\PostApproval\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ParseOCR\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\SendForApproval\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ValidateOCRAppStart\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\bin\extensions.json" />
+    <None Remove="ValidateOCRApp.csproj" />
+    <None Remove="bin\Debug\netcoreapp3.1\ParseOCR\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ProcessQueue\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ValidateOCRAppStart\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\PostApproval\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\ProcessBlobContents\function.json" />
+    <None Remove="bin\Debug\netcoreapp3.1\SendForApproval\function.json" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
 </Project>

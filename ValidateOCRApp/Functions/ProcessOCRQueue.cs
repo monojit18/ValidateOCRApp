@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Newtonsoft.Json;
 using ValidateOCRApp.Models;
 
@@ -13,7 +14,7 @@ namespace ValidateOCRApp
         [FunctionName("ProcessQueue")]
         public static async Task ProcessQueueAsync([QueueTrigger("ocrinfoqueue")]
                                                    CloudQueueMessage cloudQueueMessage,                                                   
-                                                   [OrchestrationClient] DurableOrchestrationClient
+                                                   [DurableClient] IDurableOrchestrationClient
                                                     client, ILogger log)
         {
 

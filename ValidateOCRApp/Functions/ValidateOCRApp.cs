@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Newtonsoft.Json;
 using ValidateOCRApp.Models;
 
@@ -50,14 +51,14 @@ namespace ValidateOCRApp
 
         [FunctionName("ProcessBlobContents")]
         public static async Task ProcessBlobContents([OrchestrationTrigger]
-                                                     DurableOrchestrationContext context)
+                                                     IDurableOrchestrationContext context)
         {
 
             var blobInfoModel = context.GetInput<BlobInfoModel>();
-            var blobContents = blobInfoModel.BlobContents;
+            var blobContents = blobInfoModel?.BlobContents;
 
             var parsedOCRString = await context.CallActivityAsync<string>("ParseOCR",
-                                                                          blobContents);
+                                                                          blobInfoModel);
 
             var ocrInfoModel = JsonConvert.DeserializeObject<OCRInfoModel>(parsedOCRString);
             var approvalModel = new ApprovalModel()
@@ -100,6 +101,7 @@ namespace ValidateOCRApp
 
             var isApproved = uploadImageModel.IsApproved;
             logger.LogInformation($"Approved:{isApproved}");
+
             if (isApproved == true)            
                 await UploadImageToBlobAsync(uploadImageModel.BlobContents,
                                              uploadImageModel.ImageName);           
@@ -107,15 +109,16 @@ namespace ValidateOCRApp
         }
 
         [FunctionName("ParseOCR")]
-        public static async Task<string> ParseOCRAsync([ActivityTrigger] byte[] blobContents,
-                                                       ILogger logger)
+        public static async Task<string> ParseOCRAsync([ActivityTrigger]
+                                                        BlobInfoModel blobInfoModel,
+                                                        ILogger logger)
         {
 
             var client = new HttpClient();
             var apiKeyString = Environment.GetEnvironmentVariable("OCR_API_KEY");
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKeyString);
 
-            var content = new ByteArrayContent(blobContents);
+            var content = new ByteArrayContent(blobInfoModel?.BlobContents);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             
             var ocrResponse = await client.PostAsync(Environment.GetEnvironmentVariable("OCR_URL"),
@@ -147,7 +150,7 @@ namespace ValidateOCRApp
                                                         [Blob("ocrinfoblob/{name}",
                                                         FileAccess.ReadWrite)]
                                                         byte[] blobContents,
-                                                        [OrchestrationClient]DurableOrchestrationClient                                                    
+                                                        [DurableClient] IDurableOrchestrationClient
                                                         starter, ILogger logger)
         {
 

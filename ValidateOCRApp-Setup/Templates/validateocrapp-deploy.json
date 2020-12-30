@@ -7,18 +7,21 @@
       },
       "skuName": {
         "type": "string",
-        "defaultValue": "EP1"
+        "defaultValue": "Y1"
       },
       "skuTier": {
         "type": "string",
-        "defaultValue": "ElasticPremium"
+        "defaultValue": "Dynamic"
       },
       "storageAccountName": {
         "type": "string"        
       },
+      "vnetName": {
+        "type": "string"        
+      },
       "storageAccountType": {
         "type": "string",
-        "defaultValue": "Standard_RAGRS",
+        "defaultValue": "Standard_LRS",
         "allowedValues": ["Standard_LRS", "Standard_GRS", "Standard_RAGRS"]
       },
       "location": {
@@ -39,7 +42,7 @@
       }
     },
     "variables": {
-      "functionAppName": "[parameters('appName')]",      
+      "functionAppName": "[parameters('appName')]",            
       "applicationInsightsName": "[concat(parameters('appName'), '-insights')]",
       "hostingPlanName": "[concat(parameters('appName'), '-plan')]",
       "storageAccountId": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
@@ -71,14 +74,15 @@
         }
       },
       {
-        "apiVersion": "2015-08-01",
+        "apiVersion": "2018-11-01",
         "type": "Microsoft.Web/sites",
         "name": "[variables('functionAppName')]",
         "location": "[parameters('location')]",
         "kind": "functionapp",
         "dependsOn": [
           "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
         ],
         "properties": {
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
@@ -86,11 +90,11 @@
             "appSettings": [
               {
                 "name": "AzureWebJobsDashboard",
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'),'2015-05-01-preview').key1)]"
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'),'2019-06-01').key1)]"
               },
               {
                 "name": "AzureWebJobsStorage",
-                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'),'2015-05-01-preview').key1)]"
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountId'),'2019-06-01').key1)]"
               },
               {
                 "name": "FUNCTIONS_EXTENSION_VERSION",
