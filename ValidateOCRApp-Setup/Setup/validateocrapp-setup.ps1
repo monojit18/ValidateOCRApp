@@ -37,5 +37,12 @@ Invoke-Expression -Command $keyvaultDeployPath
 $functionDeployPath = $templatesFolderPath + $functionDeployCommand
 Invoke-Expression -Command $functionDeployPath
 
-$vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName"
-Invoke-Expression -Command $vnetIntCommand
+$slotNamesList = @("Dev", "QA")
+foreach ($slotName in $slotNamesList)
+{
+      $appSlotName = $appName + $slotName
+      $vnetIntCommand = "az webapp vnet-integration add --name $appName --resource-group $resourceGroup --subnet $subnetName --vnet $vnetName -s $appSlotName"
+      Invoke-Expression -Command $vnetIntCommand
+
+}
+
