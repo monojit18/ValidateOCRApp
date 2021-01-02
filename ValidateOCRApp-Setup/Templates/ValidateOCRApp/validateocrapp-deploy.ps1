@@ -5,9 +5,9 @@ param([Parameter(Mandatory=$false)] [string] $rg,
       [Parameter(Mandatory=$false)] [string] $storageAccountName)
 
 Test-AzResourceGroupDeployment -ResourceGroupName $rg `
--TemplateFile "$fpath/$deployFileName.json" `
+-TemplateFile "$fpath/ValidateOCRApp/$deployFileName.json" `
 -appName $appName -storageAccountName $storageAccountName
 
 New-AzResourceGroupDeployment -ResourceGroupName $rg `
--TemplateFile "$fpath/$deployFileName.json" `
+-TemplateFile "$fpath/ValidateOCRApp/$deployFileName.json" `
 -appName $appName -storageAccountName $storageAccountName
