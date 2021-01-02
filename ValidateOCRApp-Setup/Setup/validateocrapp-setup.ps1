@@ -20,7 +20,7 @@ $networkNames = "-vnetName $vnetName -vnetPrefix $vnetPrefix -subnetName $subnet
 $networkDeployCommand = "/Network/$networkTemplateFileName.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $networkTemplateFileName $networkNames"
 
 $functionDeps = "-appName $appName -storageAccountName $storageAccountName"
-$functionDeployCommand = "/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $functionTemplateFileName $functionDeps"
+$functionDeployCommand = "/ValidateOCRApp/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $functionTemplateFileName $functionDeps"
 
 # PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
