@@ -1,5 +1,4 @@
-param([Parameter(Mandatory=$true)] [string] $resourceGroup = "<resource_group>",
-      [Parameter(Mandatory=$true)] [string] $subscriptionId = "<subscription_id>",      
+param([Parameter(Mandatory=$true)] [string] $resourceGroup = "<resource_group>",      
       [Parameter(Mandatory=$true)] [string] $keyVaultName = "<keyvault_name>",      
       [Parameter(Mandatory=$true)] [string] $vnetName = "srvless-workshop-vnet",
       [Parameter(Mandatory=$true)] [string] $vnetPrefix = "190.0.0.0/20",        
@@ -11,9 +10,11 @@ param([Parameter(Mandatory=$true)] [string] $resourceGroup = "<resource_group>",
       [Parameter(Mandatory=$true)] [string] $appName = "<app_name>",
       [Parameter(Mandatory=$true)] [string] $storageAccountName = "<storageAccount_Name>",
       [Parameter(Mandatory=$true)] [string] $objectId = "<object_Id>",
+      [Parameter(Mandatory=$true)] [string] $subscriptionId = "<subscription_id>",
       [Parameter(Mandatory=$true)] [string] $baseFolderPath = "<folder_path>")
 
 $templatesFolderPath = $baseFolderPath + "/Templates"
+
 $keyvaultDeployCommand = "/KeyVault/$kvTemplateFileName.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $kvTemplateFileName -keyVaultName $keyVaultName -objectId $objectId"
 
 $networkNames = "-vnetName $vnetName -vnetPrefix $vnetPrefix -subnetName $subnetName -subNetPrefix $subNetPrefix"
@@ -46,7 +47,30 @@ if (!$?)
 
 # Network deploy
 $networkDeployPath = $templatesFolderPath + $networkDeployCommand
-Invoke-Expression -Command $networkDeployPath
+$vnet = Get-AzVirtualNetwork -Name $vnetName -ResourceGroupName $resourceGroup
+if (!$vnet)
+{
+
+      Invoke-Expression -Command $networkDeployPath
+      
+}
+else
+{
+      
+      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
+      if (!$subnet)
+      {
+
+            $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
+            if (!$subnet)
+            {
+
+                  Write-Host "Error adding Subnet for $appName"
+
+            }
+
+      }
+}
 
 #  KeyVault deploy
 $keyvaultDeployPath = $templatesFolderPath + $keyvaultDeployCommand
