@@ -56,20 +56,30 @@ if (!$vnet)
 }
 else
 {
-      
-      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
-      if (!$subnet)
-      {
 
-            $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
+      try
+      {
+            $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
             if (!$subnet)
             {
 
-                  Write-Host "Error adding Subnet for $appName"
+                  $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
+                  if (!$subnet)
+                  {
 
-            }
+                        Write-Host "Error adding Subnet for $appName"
 
+                  }
+
+            }     
       }
+      catch
+      {
+
+            Write-Host "No Subnet exists for $appName"
+            
+      }
+      
 }
 
 #  KeyVault deploy
