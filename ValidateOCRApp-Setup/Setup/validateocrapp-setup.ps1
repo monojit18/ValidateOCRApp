@@ -1,4 +1,5 @@
 param([Parameter(Mandatory=$true)] [string] $resourceGroup = "serverless-workshop-rg",
+      [Parameter(Mandatory=$true)] [string] $location = "eastus",
       [Parameter(Mandatory=$true)] [string] $keyVaultName = "srvlswkshkv",
       [Parameter(Mandatory=$true)] [string] $vnetName = "srvless-workshop-vnet",
       [Parameter(Mandatory=$true)] [string] $vnetPrefix = "190.0.0.0/20",   
