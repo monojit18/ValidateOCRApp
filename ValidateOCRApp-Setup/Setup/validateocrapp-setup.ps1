@@ -1,7 +1,7 @@
-param([Parameter(Mandatory=$true)] [string] $resourceGroup = "<resource_group>",      
-      [Parameter(Mandatory=$true)] [string] $keyVaultName = "<keyvault_name>",      
+param([Parameter(Mandatory=$true)] [string] $resourceGroup = "serverless-workshop-rg",
+      [Parameter(Mandatory=$true)] [string] $keyVaultName = "srvlswkshkv",
       [Parameter(Mandatory=$true)] [string] $vnetName = "srvless-workshop-vnet",
-      [Parameter(Mandatory=$true)] [string] $vnetPrefix = "190.0.0.0/20",        
+      [Parameter(Mandatory=$true)] [string] $vnetPrefix = "190.0.0.0/20",   
       [Parameter(Mandatory=$true)] [string] $subnetName = "srvless-workshop-subnet",
       [Parameter(Mandatory=$true)] [string] $subNetPrefix = "190.0.0.0/24",
       [Parameter(Mandatory=$true)] [string] $kvTemplateFileName = "keyvault-deploy",
@@ -62,10 +62,15 @@ else
       {
 
             $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
-            if (!$subnet)
+            if (!$subnet) 
             {
 
                   Write-Host "Error adding Subnet for $appName"
+
+            }
+            else
+            {
+                  Set-AzVirtualNetwork -VirtualNetwork $vnet
 
             }
 
