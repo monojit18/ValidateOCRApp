@@ -8,7 +8,7 @@ param([Parameter(Mandatory=$true)] [string] $resourceGroup = "serverless-worksho
       [Parameter(Mandatory=$true)] [string] $kvTemplateFileName = "keyvault-deploy",
       [Parameter(Mandatory=$true)] [string] $networkTemplateFileName = "network-deploy",
       [Parameter(Mandatory=$true)] [string] $functionTemplateFileName = "validateocrapp-deploy",
-      [Parameter(Mandatory=$true)] [string] $appName = "<app_name>",
+      [Parameter(Mandatory=$true)] [string] $appName = "ValidateOCRApp",
       [Parameter(Mandatory=$true)] [string] $storageAccountName = "<storageAccount_Name>",
       [Parameter(Mandatory=$true)] [string] $objectId = "<object_Id>",
       [Parameter(Mandatory=$true)] [string] $subscriptionId = "<subscription_id>",
