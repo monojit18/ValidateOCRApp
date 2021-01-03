@@ -34,6 +34,10 @@ if (!$subscription)
 # PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
 
+# CLI Select Subscriotion 
+$subscriptionCommand = "az account set -s $subscriptionId"
+Invoke-Expression -Command $subscriptionCommand
+
 $rgRef = Get-AzResourceGroup -Name $resourceGroup -Location $location
 if (!$rgRef)
 {
@@ -78,11 +82,13 @@ if (!$vnet)
 else
 {
 
-      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
+      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet `
+      -Name $subnetName -ErrorAction SilentlyContinue
       if (!$subnet)
       {
 
-            $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
+            $subnet = Add-AzVirtualNetworkSubnetConfig -Name $subnetName `
+            -VirtualNetwork $vnet -AddressPrefix $subNetPrefix
             if (!$subnet) 
             {
 
