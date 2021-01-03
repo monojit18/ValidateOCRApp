@@ -23,8 +23,28 @@ $networkDeployCommand = "/Network/$networkTemplateFileName.ps1 -rg $resourceGrou
 $functionDeps = "-appName $appName -storageAccountName $storageAccountName"
 $functionDeployCommand = "/ValidateOCRApp/validateocrapp-deploy.ps1 -rg $resourceGroup -fpath $templatesFolderPath -deployFileName $functionTemplateFileName $functionDeps"
 
+$subscription = Get-AzSubscription -SubscriptionId $subscriptionId
+if (!$subscription)
+{
+    Write-Host "Error fetching Subscription information"
+    return;
+}
+
 # PS Select Subscription 
 Select-AzSubscription -SubscriptionId $subscriptionId
+
+$rgRef = Get-AzResourceGroup -Name $resourceGroup -Location $location
+if (!$rgRef)
+{
+
+   $rgRef = New-AzResourceGroup -Name $resourceGroup -Location $location
+   if (!$rgRef)
+   {
+        Write-Host "Error creating Resource Group"
+        return;
+   }
+
+}
 
 $vnetDisconnectCommand = "az webapp vnet-integration remove --name $appName --resource-group $resourceGroup"
 Invoke-Expression -Command $vnetDisconnectCommand
@@ -57,7 +77,7 @@ if (!$vnet)
 else
 {
 
-      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName -ErrorAction SilentlyContinue
+      $subnet = Get-AzVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name $subnetName
       if (!$subnet)
       {
 
