@@ -8,8 +8,8 @@ The purpose of this document is to provide an idea on how to implement an automa
 
 The project folder structure is divided into 2 sections -
 
-- Application Code - Containing the source code of the entire flow
-- Deployment or Setup - This is IaaC or Infrastructure as Code to setup the entire process - end to end
+- **Application Code** - Containing the source code of the entire flow
+- **Deployment or Setup** - This is IaaC or Infrastructure as Code to setup the entire process - end to end
 
 Let us delve into each one of these one by one
 
@@ -20,13 +20,13 @@ Let us delve into each one of these one by one
 Blob trigger function with an initialised Orchestrator client argument. This client will be responsible for initiation 			of an Orchestrator function which subsequently would flow through.
 
 ```c#
-[FunctionName("ValidateOCRAppStart")]
 public static async Task ValidateOCRAppStart([BlobTrigger("ocrinfoblob/{name}")]
-                                             CloudBlockBlob cloudBlockBlob,
-                                             [Blob("ocrinfoblob/{name}",
-                                             FileAccess.ReadWrite)]
-                                             byte[] blobContents,                                              																							[DurableClient] IDurableOrchestrationClient
-                                             starter, ILogger logger)
+                                                        CloudBlockBlob cloudBlockBlob,
+                                                        [Blob("ocrinfoblob/{name}",
+                                                        FileAccess.ReadWrite)]
+                                                        byte[] blobContents,
+                                                        [DurableClient] IDurableOrchestrationClient
+                                                        starter, ILogger logger)
 {
 
   var blobInfoModel = new BlobInfoModel()
@@ -37,7 +37,7 @@ public static async Task ValidateOCRAppStart([BlobTrigger("ocrinfoblob/{name}")]
 
   };
 
-  string instanceId = await  starter.StartNewAsync("ProcessBlobContents", blobInfoModel);
+  string instanceId = await starter.StartNewAsync("ProcessBlobContents", blobInfoModel);
   logger.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 
 }
@@ -49,11 +49,13 @@ Receives Blob images through *OrchestrationTrigger* from *OrchestrationClient*. 
 
 ```c#
 [FunctionName("ProcessBlobContents")]
-public static async Task ProcessBlobContents([OrchestrationTrigger] IDurableOrchestrationContext context)
+public static async Task ProcessBlobContents([OrchestrationTrigger]
+                                             IDurableOrchestrationContext context)
 {
 
   var blobInfoModel = context.GetInput<BlobInfoModel>();
-  var blobContents = blobInfoModel.BlobContents;
+  var blobContents = blobInfoModel?.BlobContents;
+
   var parsedOCRString = await context.CallActivityAsync<string>("ParseOCR",
                                                                 blobInfoModel);
 
@@ -72,7 +74,7 @@ public static async Task ProcessBlobContents([OrchestrationTrigger] IDurableOrch
 
     var dueTime = context.CurrentUtcDateTime.AddMinutes(3);
     var timerTask = context.CreateTimer(dueTime, cts.Token);
-    var approvalTask = context.WaitForExternalEvent<bool>("Approval");
+    var approvalTask = context.WaitForExternalEvent<bool>("Approval");                
     var completedTask = await Task.WhenAny(approvalTask, timerTask);
 
     var isApproved = approvalTask.Result;
@@ -87,7 +89,7 @@ public static async Task ProcessBlobContents([OrchestrationTrigger] IDurableOrch
 
     await context.CallActivityAsync("PostApproval", uploadImageModel);                
 
-    }
+  }
 }
 ```
 
@@ -120,15 +122,17 @@ When Any one of these happens - either a timeout or the approval event is fired,
 
 ```C#
 [FunctionName("PostApproval")]
-public static async Task PostApprovalAsync([ActivityTrigger] UploadImageModel uploadImageModel,
-																					ILogger logger)
+public static async Task PostApprovalAsync([ActivityTrigger]
+                                           UploadImageModel uploadImageModel,
+                                           ILogger logger)
 {
 
   var isApproved = uploadImageModel.IsApproved;
   logger.LogInformation($"Approved:{isApproved}");
+
   if (isApproved == true)            
-  await UploadImageToBlobAsync(uploadImageModel.BlobContents,
-  uploadImageModel.ImageName);           
+    await UploadImageToBlobAsync(uploadImageModel.BlobContents,
+                                 uploadImageModel.ImageName);           
 
 }
 ```
@@ -140,21 +144,22 @@ public static async Task PostApprovalAsync([ActivityTrigger] UploadImageModel up
 ```c#
 [FunctionName("ProcessQueue")]
 public static async Task ProcessQueueAsync([QueueTrigger("ocrinfoqueue")]
-                                           CloudQueueMessage cloudQueueMessage, 
+                                           CloudQueueMessage cloudQueueMessage,                                                   
                                            [DurableClient] IDurableOrchestrationClient
-																					 client, ILogger log)
+                                           client, ILogger log)
 {
 
-    var queueMessageString = cloudQueueMessage.AsString;
-    log.LogDebug(queueMessageString);
+  var queueMessageString = cloudQueueMessage.AsString;
+  log.LogDebug(queueMessageString);
 
-    var approvalModel = JsonConvert.DeserializeObject<ApprovalModel>(queueMessageString);
-    var languageString = approvalModel.Language;
-    //shouldApprove
-    bool shouldApprove = (string.Compare(languageString, "unk",
-    StringComparison.CurrentCultureIgnoreCase) != 0);
+  var approvalModel = JsonConvert.DeserializeObject<ApprovalModel>(queueMessageString);
+  var languageString = approvalModel.Language;
+  //shouldApprove
+  bool shouldApprove = (string.Compare(languageString, "unk",
+                                       StringComparison.CurrentCultureIgnoreCase) != 0);
 
-    await client.RaiseEventAsync(approvalModel.InstanceId, "Approval", shouldApprove);
+  await client.RaiseEventAsync(approvalModel.InstanceId, "Approval", shouldApprove);
+
 
 }
        
